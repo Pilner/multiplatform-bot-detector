@@ -1,0 +1,24 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+venv*
+virtualenv*
+
+# Environment variables
+.env
+.env*
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# User-specific files
+.vscode
+
+# Datasets
+datasets/*.csv
+datasets/*.json
+datasets/*.xlsx
+datasets/*.xls
