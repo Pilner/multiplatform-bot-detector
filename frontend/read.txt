@@ -1,0 +1,1 @@
+Frontend will be a Vite-React App that can be integrated as a chrome extension
