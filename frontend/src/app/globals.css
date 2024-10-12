@@ -1,0 +1,187 @@
+/* #region CSS Variables */
+:root {
+	--main-font: "Inter", sans-serif;
+	--secondary-font: "Roboto", sans-serif;
+
+	--main-accent: #ff0000;
+	--sub-accent: #ff0000;
+
+	--white: #ffffff;
+	--black: #000000;
+	--white-bg: #f5f5f5;
+
+	--button-color: var(--main-accent);
+
+	--navbar-color: var(--white-bg);
+	--footer-color: var(--white-bg);
+}
+
+.main-accent {
+	color: var(--main-accent);
+}
+
+.sub-accent {
+	color: var(--sub-accent);
+}
+
+/* #endregion */
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+	/* This is responsible for making the scrollbar disappear */
+	display: none;
+}
+
+body {
+	background-color: var(--white-bg);
+	font-family: var(--secondary-font);
+}
+
+.container {
+	margin: auto;
+	width: 70%;
+	/* Change this to how fit the page's contents are */
+	border: 1px solid red;
+	height: 100%;
+}
+
+.button {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+ul,
+ol {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+ul li>a {
+	border: 1px solid rgba(0, 0, 0, 0);
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+	transition: 500ms;
+}
+
+ul li>a:hover {
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	transition: 500ms;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+
+/* #region Input Styling */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="date"],
+textarea,
+select {
+	font-family: inherit;
+	font-size: inherit;
+	border-radius: 0.5rem;
+	border: 1px solid rgba(0, 0, 0, 0.4);
+	padding: 0.5rem 1rem;
+	box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+	outline: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+textarea {
+	font-family: var(--secondary-font);
+}
+
+input[type="checkbox"] {
+	width: 1.5rem;
+	aspect-ratio: 1/1;
+	margin: 0 1rem;
+}
+
+select {
+	padding: 0.5rem;
+	border: 1.5px solid var(--black);
+}
+
+/* Number Input styling */
+input[type="number"] {
+	-moz-appearance: textfield;
+	appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	appearance: none;
+	margin: 0;
+}
+
+/* #endregion */
+
+/* #region Font Classes */
+.heroTitleFont {
+	font-family: var(--main-font);
+	font-weight: 700;
+	font-size: 50px;
+	color: inherit;
+}
+
+.heroSubTitleFont {
+	font-family: var(--secondary-font);
+	font-weight: 400;
+	font-size: 20px;
+	color: inherit;
+}
+
+.sectionTitleFont {
+	font-family: var(--main-font);
+	padding-bottom: 1.5rem;
+	font-weight: 700;
+	font-size: 40px;
+	color: inherit;
+}
+
+.sectionSubTitleFont {
+	font-family: var(--secondary-font);
+	font-weight: 400;
+	font-size: 24px;
+	margin: auto;
+	color: inherit;
+}
+
+.sectionTextFont {
+	font-family: var(--secondary-font);
+	font-weight: 600;
+	font-size: 22px;
+	color: inherit;
+}
+
+/* #endregion */
