@@ -1,0 +1,21 @@
+#page {
+	min-height: 100vh;
+	border: 1px solid red;
+}
+
+#hero {
+	text-align: center;
+	margin: 50px 0;
+}
+
+#information {
+	display: flex;
+	gap: 30px;
+}
+
+#information > div {
+	flex: 1;
+	background-color: var(--gray);
+	border-radius: 16px;
+	padding: 32px;
+}

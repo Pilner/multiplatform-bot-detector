@@ -1,14 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 /* #region CSS Variables */
 :root {
-	--main-font: "Inter", sans-serif;
-	--secondary-font: "Roboto", sans-serif;
+	--main-font: "Poppins", sans-serif;
 
 	--main-accent: #ff0000;
 	--sub-accent: #ff0000;
 
+	--gray: #D9D9D9;
+	--dark-gray: #767676;
+
 	--white: #ffffff;
 	--black: #000000;
-	--white-bg: #f5f5f5;
+	--white-bg: #FFFFFF;
 
 	--button-color: var(--main-accent);
 
@@ -29,6 +33,7 @@
 * {
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
 }
 
 html {
@@ -42,12 +47,12 @@ html {
 
 body {
 	background-color: var(--white-bg);
-	font-family: var(--secondary-font);
+	font-family: var(--main-font);
 }
 
 .container {
 	margin: auto;
-	width: 70%;
+	width: 60%;
 	/* Change this to how fit the page's contents are */
 	border: 1px solid red;
 	height: 100%;
@@ -117,7 +122,7 @@ select:focus {
 }
 
 textarea {
-	font-family: var(--secondary-font);
+	font-family: var(--main-font);
 }
 
 input[type="checkbox"] {
@@ -155,22 +160,22 @@ input::-webkit-inner-spin-button {
 }
 
 .heroSubTitleFont {
-	font-family: var(--secondary-font);
+	font-family: var(--main-font);
 	font-weight: 400;
-	font-size: 20px;
+	font-size: 32px;
 	color: inherit;
 }
 
 .sectionTitleFont {
 	font-family: var(--main-font);
-	padding-bottom: 1.5rem;
+	padding-bottom: 1rem;
 	font-weight: 700;
-	font-size: 40px;
+	font-size: 32px;
 	color: inherit;
 }
 
 .sectionSubTitleFont {
-	font-family: var(--secondary-font);
+	font-family: var(--main-font);
 	font-weight: 400;
 	font-size: 24px;
 	margin: auto;
@@ -178,9 +183,9 @@ input::-webkit-inner-spin-button {
 }
 
 .sectionTextFont {
-	font-family: var(--secondary-font);
-	font-weight: 600;
-	font-size: 22px;
+	font-family: var(--main-font);
+	font-weight: 400;
+	font-size: 20px;
 	color: inherit;
 }
 
