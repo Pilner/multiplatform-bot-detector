@@ -1,0 +1,24 @@
+#result {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	margin: 50px 0;
+}
+
+#result #firstRow {
+	display: flex;
+	gap: 30px;
+	justify-content: center;
+}
+
+
+#result #secondRow {
+	display: flex;
+	gap: 30px;
+	justify-content: center;
+}
+
+#result #thirdRow {
+	display: flex;
+	justify-content: center;
+}

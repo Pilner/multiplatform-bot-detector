@@ -11,7 +11,7 @@
 	--dark-gray: #767676;
 
 	--white: #ffffff;
-	--black: #000000;
+	--black: #141414;
 	--white-bg: #FFFFFF;
 
 	--button-color: var(--main-accent);
@@ -46,15 +46,16 @@ html {
 }
 
 body {
+	color: var(--black);
 	background-color: var(--white-bg);
 	font-family: var(--main-font);
 }
 
 .container {
 	margin: auto;
-	width: 60%;
+	width: 75%;
 	/* Change this to how fit the page's contents are */
-	border: 1px solid red;
+	/* border: 1px solid red; */
 	height: 100%;
 }
 
