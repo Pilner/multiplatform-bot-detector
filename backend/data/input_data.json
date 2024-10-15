@@ -1,0 +1,28 @@
+{
+    "user_id": 1,
+    "username": "user123",
+    "screenname": "user_screen",
+    "description": "This is a sample user description.",
+    "user_md_follower": 150,
+    "user_md_following": 75,
+    "user_md_total_post": 10,
+    "user_md_total_like": 300,
+    "user_md_verified": true,
+    "user_md_protected": false,
+    "posts": [
+        {
+            "post_text": "This is a sample post.",
+            "post_like": 50,
+            "post_retweet": 5,
+            "post_reply": 10,
+            "post_quote": 2
+        },
+        {
+            "post_text": "Another sample post.",
+            "post_like": 20,
+            "post_retweet": 3,
+            "post_reply": 5,
+            "post_quote": 1
+        }
+    ]
+}
