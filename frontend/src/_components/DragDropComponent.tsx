@@ -1,14 +1,16 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./styles/DragDropComponent.module.css";
 import DragIcon from "@/public/icons/DragIcon.svg";
 
 export default function DragDropComponent() {
+	const router = useRouter();
 	return (
 		<section
 			id={styles.dragBox}
-			onDrop={dropHandler}
+			onDrop={(e) => dropHandler(e, router)}
 			onDragOver={dragOverHandler}
 		>
 			<div>
@@ -21,7 +23,11 @@ export default function DragDropComponent() {
 	);
 }
 
-function dropHandler(e: any) {
+const header = {
+	"Content-Type": "application/json",
+};
+
+function dropHandler(e: any, router: any) {
 	console.log("File dropped");
 
 	// Prevent default behavior (Prevent file from being opened)
@@ -33,12 +39,26 @@ function dropHandler(e: any) {
 	if (file.type === "application/json") {
 		// Read the file
 		const reader = new FileReader();
+
 		reader.onload = (e) => {
 			if (!e.target?.result) {
 				return;
 			}
+
 			const content = e.target.result;
-			console.log(content);
+			const parsed_content = JSON.parse(content as string);
+
+			fetch("http://localhost:8000/detection", {
+				method: "POST",
+				body: JSON.stringify(parsed_content),
+				headers: header,
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					localStorage.setItem("data", JSON.stringify(data));
+
+					router.push("/results");
+				});
 		};
 		reader.readAsText(file);
 	} else {
