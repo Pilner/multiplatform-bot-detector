@@ -1,0 +1,8 @@
+pandas
+numpy<2
+Flask
+flask_cors
+transformers
+torch
+emoji
+scikit_learn

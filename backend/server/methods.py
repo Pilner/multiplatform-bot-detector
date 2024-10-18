@@ -6,7 +6,7 @@ from sklearn.calibration import CalibratedClassifierCV
 
 from feature_engineering import uppercase_count, lowercase_count, numeric_count, special_count, emoji_count, hashtag_count, ratio, word_count, string_entropy
 
-dataset_path = "../datasets/initial_train_data.csv"
+dataset_path = "../data/initial_train_data.csv"
 
 train_data_labeled = pd.read_csv(dataset_path)
 
