@@ -151,43 +151,43 @@ def feature_engineering(input_data):
 	data = {}
 	data["user_id"] = input_data["user_id"] if "user_id" in input_data else None
 
-	data["username"] = input_data["username"] if "username" in input_data else None
+	data["username"] = input_data["username"] if "username" in input_data and input_data["username"] != "" else None
 	data["username_uppercase"] = uppercase_count(
-		input_data["username"]) if "username" in input_data else None
+		input_data["username"]) if "username" in input_data and input_data["username"] != "" else None
 	data["username_lowercase"] = lowercase_count(
-		input_data["username"]) if "username" in input_data else None
+		input_data["username"]) if "username" in input_data and input_data["username"] != "" else None
 	data["username_numeric"] = numeric_count(
-		input_data["username"]) if "username" in input_data else None
+		input_data["username"]) if "username" in input_data and input_data["username"] != "" else None
 	data["username_special"] = special_count(
-		input_data["username"]) if "username" in input_data else None
+		input_data["username"]) if "username" in input_data and input_data["username"] != "" else None
 	data["username_length"] = len(
-		input_data["username"]) if "username" in input_data else None
+		input_data["username"]) if "username" in input_data and input_data["username"] != "" else None
 	data["username_se"] = string_entropy(
-		input_data["username"]) if "username" in input_data else None
+		input_data["username"]) if "username" in input_data and input_data["username"] != "" else None
 
-	data["screenname"] = input_data["screenname"] if "screenname" in input_data else None
+	data["screenname"] = input_data["screenname"] if "screenname" in input_data and input_data["screenname"] != "" else None
 	data["screenname_uppercase"] = uppercase_count(
-		input_data["screenname"]) if "screenname" in input_data else None
+		input_data["screenname"]) if "screenname" in input_data and input_data["screenname"] != "" else None
 	data["screenname_lowercase"] = lowercase_count(
-		input_data["screenname"]) if "screenname" in input_data else None
+		input_data["screenname"]) if "screenname" in input_data and input_data["screenname"] != "" else None
 	data["screenname_numeric"] = numeric_count(
-		input_data["screenname"]) if "screenname" in input_data else None
+		input_data["screenname"]) if "screenname" in input_data and input_data["screenname"] != "" else None
 	data["screenname_special"] = special_count(
-		input_data["screenname"]) if "screenname" in input_data else None
+		input_data["screenname"]) if "screenname" in input_data and input_data["screenname"] != "" else None
 	data["screenname_length"] = len(
-		input_data["screenname"]) if "screenname" in input_data else None
+		input_data["screenname"]) if "screenname" in input_data and input_data["screenname"] != "" else None
 	data["screenname_se"] = string_entropy(
-		input_data["screenname"]) if "screenname" in input_data else None
+		input_data["screenname"]) if "screenname" in input_data and input_data["screenname"] != "" else None
 	data["screenname_emoji"] = emoji_count(
-		input_data["screenname"]) if "screenname" in input_data else None
+		input_data["screenname"]) if "screenname" in input_data and input_data["screenname"] != "" else None
 	data["screenname_hashtag"] = hashtag_count(
-		input_data["screenname"]) if "screenname" in input_data else None
+		input_data["screenname"]) if "screenname" in input_data and input_data["screenname"] != "" else None
 	data["screenname_word"] = word_count(
-		input_data["screenname"]) if "screenname" in input_data else None
+		input_data["screenname"]) if "screenname" in input_data and input_data["screenname"] != "" else None
 
-	data["description"] = input_data["description"] if "description" in input_data else None
+	data["description"] = input_data["description"] if "description" in input_data and input_data["description"] != "" else None
 	data["description_length"] = len(
-		input_data["description"]) if "description" in input_data else None
+		input_data["description"]) if "description" in input_data and input_data["description"] != "" else None
 
 	data["user_md_follower"] = input_data["followers"] if "followers" in input_data else None
 	data["user_md_following"] = input_data["followings"] if "followings" in input_data else None
@@ -207,9 +207,9 @@ def feature_engineering(input_data):
 			post_data["post_md_retweet"] = post["post_retweet"] if "post_retweet" in post else None
 			post_data["post_md_reply"] = post["post_reply"] if "post_reply" in post else None
 			post_data["post_md_quote"] = post["post_quote"] if "post_quote" in post else None
-			post_data["post_text"] = post["post_text"] if "post_text" in post else None
+			post_data["post_text"] = post["post_text"] if "post_text" in post and post["post_text"] != "" else None
 			post_data["post_text_length"] = len(
-				post["post_text"]) if "post_text" in post else None
+				post["post_text"]) if "post_text" in post and post["post_text"] != "" else None
 
 			data_posts.append(post_data)
 	else:
