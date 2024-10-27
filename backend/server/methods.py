@@ -12,7 +12,7 @@ train_data_labeled = pd.read_csv(dataset_path)
 
 pipeline_model = "distilbert-base-uncased-finetuned-sst-2-english"
 
-model_path = "../models/Unsupervised_models_10-15.joblib"
+model_path = "../models/Unsupervised_models_10-26.joblib"
 model_tool = joblib.load(model_path)
 
 feature_sets = {
