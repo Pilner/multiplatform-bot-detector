@@ -1,9 +1,21 @@
+"use client";
+
+import { useState } from "react";
+
 import styles from "./page.module.css";
 import DragDropComponent from "@/_components/DragDropComponent";
 import Navbar from "@/_components/semantics/Navbar";
 import Footer from "@/_components/semantics/Footer";
+import InputFormComponent from "@/_components/InputFormComponent";
+
+enum InputMode {
+	DragDrop,
+	InputForm,
+}
 
 export default function Home() {
+	const [inputMode, setInputMode] = useState<InputMode>(InputMode.DragDrop);
+
 	return (
 		<>
 			<Navbar />
@@ -19,7 +31,32 @@ export default function Home() {
 							Self-Training Approach
 						</p>
 					</section>
-					<DragDropComponent />
+					<div id={styles.modeSelector}>
+						<button
+							type="button"
+							onClick={() => setInputMode(InputMode.DragDrop)}
+							className={
+								inputMode == InputMode.DragDrop
+									? styles.activeButton
+									: ""
+							}
+						>
+							Drag & Drop
+						</button>
+						<button
+							type="button"
+							onClick={() => setInputMode(InputMode.InputForm)}
+							className={
+								inputMode == InputMode.InputForm
+									? styles.activeButton
+									: ""
+							}
+						>
+							Input Form
+						</button>
+					</div>
+					{inputMode == InputMode.DragDrop && <DragDropComponent />}
+					{inputMode == InputMode.InputForm && <InputFormComponent />}
 					<section id={styles.information}>
 						<div id={styles.aboutDiv}>
 							<h3 className="sectionTitleFont">About</h3>

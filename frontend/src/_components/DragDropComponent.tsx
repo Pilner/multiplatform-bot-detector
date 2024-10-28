@@ -5,6 +5,10 @@ import Image from "next/image";
 import styles from "./styles/DragDropComponent.module.css";
 import DragIcon from "@/public/icons/DragIcon.svg";
 
+const header = {
+	"Content-Type": "application/json",
+};
+
 export default function DragDropComponent() {
 	const router = useRouter();
 	return (
@@ -22,10 +26,6 @@ export default function DragDropComponent() {
 		</section>
 	);
 }
-
-const header = {
-	"Content-Type": "application/json",
-};
 
 function dropHandler(e: any, router: any) {
 	console.log("File dropped");
