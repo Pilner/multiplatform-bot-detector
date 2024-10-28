@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import { Input, InputTextArea, InputSelect } from "./Input";
+import Loader from "./Loader";
+
 import styles from "./styles/InputFormComponent.module.css";
 
 interface postDataProps {
@@ -39,8 +41,11 @@ export default function InputFormComponent() {
 
 	const router = useRouter();
 	const [posts, setPosts] = useState<{ id: number }[]>([]);
+	const [loading, setLoading] = useState(false);
 
 	const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+		setLoading(true);
+		document.body.classList.add(styles.noScroll);
 		e.preventDefault();
 
 		const formData = new FormData(e.currentTarget);
@@ -125,6 +130,7 @@ export default function InputFormComponent() {
 			.then((data) => {
 				localStorage.setItem("data", JSON.stringify(data));
 
+				document.body.classList.remove(styles.noScroll);
 				router.push("/results");
 			});
 	};
@@ -155,174 +161,180 @@ export default function InputFormComponent() {
 	};
 
 	return (
-		<div id={styles.inputForm}>
-			<form onSubmit={submitHandler}>
-				<div id={styles.inputDiv}>
+		<>
+			{loading && (
+				<div className={styles.loader}>
 					<div>
-						<Input
-							type="text"
-							name="username"
-							id="username"
-							label="Username: "
-							placeholder="Enter Username"
-						/>
-						<Input
-							type="text"
-							name="screenname"
-							id="screenname"
-							label="Screen Name: "
-							placeholder="Enter Screen Name"
-						/>
-					</div>
-
-					<div>
-						<InputTextArea
-							name="description"
-							id="description"
-							label="Description: "
-							placeholder="Enter Description"
-						/>
-					</div>
-
-					<div>
-						<Input
-							type="number"
-							negative={false}
-							name="followers"
-							id="followers"
-							label="Followers Count: "
-							placeholder="Enter Followers Count"
-						/>
-						<Input
-							type="number"
-							negative={false}
-							name="followings"
-							id="followings"
-							label="Followings Count: "
-							placeholder="Enter Followings Count"
-						/>
-					</div>
-
-					<div>
-						<Input
-							type="number"
-							negative={false}
-							name="totalLikes"
-							id="totalLikes"
-							label="Total Likes Count: "
-							placeholder="Enter Total Likes Count"
-						/>
-						<Input
-							type="number"
-							negative={false}
-							name="totalPosts"
-							id="totalPosts"
-							label="Total Post Count: "
-							placeholder="Enter Total Post Count"
-						/>
-					</div>
-
-					<div>
-						<InputSelect
-							name="verified"
-							id="verified"
-							label="Verified Account: "
-							required={true}
-							value=""
-							options={isVerifiedProtectedOptions}
-						/>
-						<InputSelect
-							name="protected"
-							id="protected"
-							label="Protected Account: "
-							required={true}
-							value=""
-							options={isVerifiedProtectedOptions}
-						/>
+						<Loader />
 					</div>
 				</div>
-				<div className={styles.postInputDiv}>
-					{posts.map((post, i) => (
-						<div className={styles.post} key={post.id}>
-							<div className={styles.postInputHeader}>
-								<div>
-									<h3 className="sectionSubtitleFont">
-										Post {i + 1}
-									</h3>
+			)}
+
+			<div id={styles.inputForm}>
+				<form onSubmit={submitHandler}>
+					<div id={styles.inputDiv}>
+						<div>
+							<Input
+								type="text"
+								name="username"
+								id="username"
+								label="Username: "
+								placeholder="Enter Username"
+							/>
+							<Input
+								type="text"
+								name="screenname"
+								id="screenname"
+								label="Screen Name: "
+								placeholder="Enter Screen Name"
+							/>
+						</div>
+						<div>
+							<InputTextArea
+								name="description"
+								id="description"
+								label="Description: "
+								placeholder="Enter Description"
+							/>
+						</div>
+						<div>
+							<Input
+								type="number"
+								negative={false}
+								name="followers"
+								id="followers"
+								label="Followers Count: "
+								placeholder="Enter Followers Count"
+							/>
+							<Input
+								type="number"
+								negative={false}
+								name="followings"
+								id="followings"
+								label="Followings Count: "
+								placeholder="Enter Followings Count"
+							/>
+						</div>
+						<div>
+							<Input
+								type="number"
+								negative={false}
+								name="totalLikes"
+								id="totalLikes"
+								label="Total Likes Count: "
+								placeholder="Enter Total Likes Count"
+							/>
+							<Input
+								type="number"
+								negative={false}
+								name="totalPosts"
+								id="totalPosts"
+								label="Total Post Count: "
+								placeholder="Enter Total Post Count"
+							/>
+						</div>
+						<div>
+							<InputSelect
+								name="verified"
+								id="verified"
+								label="Verified Account: "
+								required={true}
+								value=""
+								options={isVerifiedProtectedOptions}
+							/>
+							<InputSelect
+								name="protected"
+								id="protected"
+								label="Protected Account: "
+								required={true}
+								value=""
+								options={isVerifiedProtectedOptions}
+							/>
+						</div>
+					</div>
+					<div className={styles.postInputDiv}>
+						{posts.map((post, i) => (
+							<div className={styles.post} key={post.id}>
+								<div className={styles.postInputHeader}>
+									<div>
+										<h3 className="sectionSubtitleFont">
+											Post {i + 1}
+										</h3>
+									</div>
+									<div>
+										<button onClick={() => deletePost(i)}>
+											<FontAwesomeIcon
+												icon={faXmark}
+												size="2xl"
+											/>
+										</button>
+									</div>
 								</div>
-								<div>
-									<button onClick={() => deletePost(i)}>
-										<FontAwesomeIcon
-											icon={faXmark}
-											size="2xl"
+								<div className={styles.postInputContent}>
+									<InputTextArea
+										name={`postText${i}`}
+										id={`postText${i}`}
+										label="Post Text: "
+										placeholder={`Enter Post Text ${i + 1}`}
+									/>
+									<div className={styles.postInputCounts}>
+										<Input
+											type="number"
+											negative={false}
+											name={`postLikes${i}`}
+											id={`postLikes${i}`}
+											label="Likes: "
+											placeholder="0"
 										/>
-									</button>
+										<Input
+											type="number"
+											negative={false}
+											name={`postRetweets${i}`}
+											id={`postRetweets${i}`}
+											label="Retweets: "
+											placeholder="0"
+										/>
+										<Input
+											type="number"
+											negative={false}
+											name={`postReplies${i}`}
+											id={`postReplies${i}`}
+											label="Replies: "
+											placeholder="0"
+										/>
+										<Input
+											type="number"
+											negative={false}
+											name={`postQuotes${i}`}
+											id={`postQuotes${i}`}
+											label="Quotes: "
+											placeholder="0"
+										/>
+									</div>
 								</div>
 							</div>
-							<div className={styles.postInputContent}>
-								<InputTextArea
-									name={`postText${i}`}
-									id={`postText${i}`}
-									label="Post Text: "
-									placeholder={`Enter Post Text ${i + 1}`}
-								/>
-								<div className={styles.postInputCounts}>
-									<Input
-										type="number"
-										negative={false}
-										name={`postLikes${i}`}
-										id={`postLikes${i}`}
-										label="Likes: "
-										placeholder="0"
-									/>
-									<Input
-										type="number"
-										negative={false}
-										name={`postRetweets${i}`}
-										id={`postRetweets${i}`}
-										label="Retweets: "
-										placeholder="0"
-									/>
-									<Input
-										type="number"
-										negative={false}
-										name={`postReplies${i}`}
-										id={`postReplies${i}`}
-										label="Replies: "
-										placeholder="0"
-									/>
-									<Input
-										type="number"
-										negative={false}
-										name={`postQuotes${i}`}
-										id={`postQuotes${i}`}
-										label="Quotes: "
-										placeholder="0"
-									/>
-								</div>
+						))}
+						{posts.length < MAX_POSTS && (
+							<div id={styles.addPostsDiv}>
+								<button type="button" onClick={addPost}>
+									<p className="inputLabelFont">
+										{posts.length == 0
+											? "Add posts"
+											: "Add more posts"}
+									</p>
+								</button>
 							</div>
-						</div>
-					))}
-					{posts.length < MAX_POSTS && (
-						<div id={styles.addPostsDiv}>
-							<button type="button" onClick={addPost}>
-								<p className="inputLabelFont">
-									{posts.length == 0
-										? "Add posts"
-										: "Add more posts"}
-								</p>
-							</button>
-						</div>
-					)}
-				</div>
-				<div id={styles.submitButtonDiv}>
-					<input
-						id={styles.submitButton}
-						type="submit"
-						value="Submit"
-					/>
-				</div>
-			</form>
-		</div>
+						)}
+					</div>
+					<div id={styles.submitButtonDiv}>
+						<input
+							id={styles.submitButton}
+							type="submit"
+							value="Submit"
+						/>
+					</div>
+				</form>
+			</div>
+		</>
 	);
 }

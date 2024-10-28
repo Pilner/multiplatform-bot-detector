@@ -1,5 +1,6 @@
 #page {
 	min-height: 100vh;
+	position: relative;
 	/* border: 1px solid red; */
 }
 
