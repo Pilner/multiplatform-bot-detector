@@ -65,8 +65,8 @@ export default function Results() {
 					<section id={styles.hero}>
 						<h1 className="heroTitleFont">Results</h1>
 						<p className="heroSubTitleFont">
-							Upon uploading of the .csv or .json file, the user
-							can then
+							Upon submission of the .json file or input form, the
+							user can then
 							<br />
 							see whether the profile identified is a malicious
 							social

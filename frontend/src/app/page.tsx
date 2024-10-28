@@ -22,7 +22,6 @@ export default function Home() {
 			<main id={styles.page}>
 				<div className="container">
 					<section id={styles.hero}>
-						<h1 className="heroTitleFont">DetectIfAI</h1>
 						<p className="heroSubTitleFont">
 							A Multiplatform Ensemble-Based Malicious Bot
 							<br />
@@ -61,10 +60,10 @@ export default function Home() {
 						<div id={styles.aboutDiv}>
 							<h3 className="sectionTitleFont">About</h3>
 							<p className="sectionTextFont">
-								DetectifAI is a novel approach in identifying
-								and classifying the risks posed by malicious
-								social bots on social media. As bots continue to
-								evolve and mimic human behavior, they create
+								This tool is a novel approach in identifying and
+								classifying the risks posed by malicious social
+								bots on social media. As bots continue to evolve
+								and mimic human behavior, they create
 								significant challenges in areas like public
 								opinion, democracy, and online safety. This tool
 								aims to efficiently identify these threats and
@@ -78,7 +77,7 @@ export default function Home() {
 						<div id={styles.objectivesDiv}>
 							<h3 className="sectionTitleFont">Objectives</h3>
 							<p className="sectionTextFont">
-								DetectifAI aims to focus on enhancing the
+								This tool aims to focus on enhancing the
 								detection of malicious social media bots by
 								leveraging Semi-Supervised Self-Learning to
 								identify patterns across various platforms. This
@@ -87,7 +86,7 @@ export default function Home() {
 								integrity of social media by helping platforms
 								detect and ban harmful bots. By preventing the
 								spread of misinformation, spam, and trend
-								manipulation, DetectifAI also strives to protect
+								manipulation, this tool also strives to protect
 								individuals and the public from misleading
 								content. Additionally, the study seeks to
 								advance the fields of Machine Learning,
