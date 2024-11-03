@@ -204,4 +204,18 @@ button {
 	color: inherit;
 }
 
+.cardTitleFont {
+	font-family: var(--main-font);
+	font-weight: 700;
+	font-size: 28px;
+	color: inherit
+}
+
+.cardTextFont {
+	font-family: var(--main-font);
+	font-weight: 400;
+	font-size: 24px;
+	color: inherit
+}
+
 /* #endregion */

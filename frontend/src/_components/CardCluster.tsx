@@ -1,47 +1,16 @@
 import styles from "./styles/CardCluster.module.css";
-import Card, { MetadataCard, PostDetailsCard } from "./Card";
-
-type dataProps = {
-	user_id: number;
-	username: string;
-	screenname: string;
-	description: string;
-	followers: number;
-	followings: number;
-	total_likes: number;
-	total_posts: number;
-	verified: boolean;
-	protected: boolean;
-	username_probability: {
-		human: number;
-		bot: number;
-	};
-	screenname_probability: {
-		human: number;
-		bot: number;
-	};
-	description_probability: {
-		human: number;
-		bot: number;
-	};
-	user_metadata_probability: {
-		human: number;
-		bot: number;
-	};
-	post_probability: {
-		human: number;
-		bot: number;
-	};
-	final_probability: {
-		human: number;
-		bot: number;
-	};
-	final_prediction: string;
-	confidence_score: number;
-};
+import { APIDataType } from "@/_types/APIDataType";
+import {
+	UsernameCard,
+	ScreennameCard,
+	DescriptionCard,
+	MetadataCard,
+	PostDetailsCard,
+	LabelCard,
+} from "./Card";
 
 type CardClusterProps = {
-	data?: dataProps;
+	data?: APIDataType;
 };
 
 export default function CardCluster({ data }: CardClusterProps) {
@@ -51,18 +20,17 @@ export default function CardCluster({ data }: CardClusterProps) {
 
 	return (
 		<section id={styles.result}>
-			<div id={styles.firstRow}>
-				<Card type="username" data={data} />
-				<Card type="screenname" data={data} />
-			</div>
-			<div id={styles.secondRow}>
-				<Card type="description" data={data} />
-				<MetadataCard data={data} />
-				<PostDetailsCard data={data} />
-			</div>
-			<div id={styles.thirdRow}>
-				<Card type="label" data={data} />
-			</div>
+			{data.username && <UsernameCard data={data} />}
+			{data.screenname && <ScreennameCard data={data} />}
+			{data.description && <DescriptionCard data={data} />}
+			{(data.followings ||
+				data.followers ||
+				data.total_likes ||
+				data.total_posts ||
+				data.protected != null ||
+				data.verified != null) && <MetadataCard data={data} />}
+			{data.total_posts != 0 && <PostDetailsCard data={data} />}
+			<LabelCard data={data} />
 		</section>
 	);
 }

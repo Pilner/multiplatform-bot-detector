@@ -1,212 +1,331 @@
-import Image from "next/image";
+import { APIDataType } from "@/_types/APIDataType";
+
+import { Bar } from "react-chartjs-2";
+import {
+	Chart,
+	CategoryScale,
+	LinearScale,
+	BarElement,
+	Title,
+	Tooltip,
+	Legend,
+} from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+	faUser,
+	faSignature,
+	faFileLines,
+	faCircleInfo,
+	faComments,
+	faRobot,
+} from "@fortawesome/free-solid-svg-icons";
+
 import styles from "./styles/Card.module.css";
 
-import UserIcon from "@/public/icons/User.svg";
-import DocumentIcon from "@/public/icons/Document.svg";
-import InformationIcon from "@/public/icons/Information.svg";
-import MonitorIcon from "@/public/icons/Monitor.svg";
-import RobotIcon from "@/public/icons/Robot.svg";
-import MagnifyIcon from "@/public/icons/Magnify.svg";
-
-type dataProps = {
-	user_id: number;
-	username: string;
-	screenname: string;
-	description: string;
-	followers: number;
-	followings: number;
-	total_likes: number;
-	total_posts: number;
-	verified: boolean;
-	protected: boolean;
-	username_probability: {
-		human: number;
-		bot: number;
-	};
-	screenname_probability: {
-		human: number;
-		bot: number;
-	};
-	description_probability: {
-		human: number;
-		bot: number;
-	};
-	user_metadata_probability: {
-		human: number;
-		bot: number;
-	};
-	post_probability: {
-		human: number;
-		bot: number;
-	};
-	final_probability: {
-		human: number;
-		bot: number;
-	};
-	final_prediction: string;
-	confidence_score: number;
-};
-
 type CardProps = {
-	type: "username" | "screenname" | "description" | "label";
-	data: dataProps;
+	data: APIDataType;
 };
 
-export default function Card(props: CardProps) {
-	let title, icon, alt, text, bot_probability, human_probability;
-	switch (props.type) {
-		case "username":
-			title = "Username";
-			icon = UserIcon;
-			alt = "User Icon";
-			text = props.data.username;
-			bot_probability = props.data.username_probability.bot;
-			human_probability = props.data.username_probability.human;
+Chart.register(
+	CategoryScale,
+	LinearScale,
+	BarElement,
+	Title,
+	Tooltip,
+	ChartDataLabels,
+	Legend
+);
 
-			break;
-		case "screenname":
-			title = "Screen Name";
-			icon = DocumentIcon;
-			alt = "Document Icon";
-			text = props.data.screenname;
-			bot_probability = props.data.screenname_probability.bot;
-			human_probability = props.data.screenname_probability.human;
+const options = {
+	indexAxis: "y" as const,
+	scales: {
+		x: {
+			stacked: true,
+			min: 0,
+			max: 1,
+		},
+		y: {
+			stacked: true,
+		},
+	},
+	responsive: true,
+	maintainAspectRatio: false,
+	plugins: {
+		tooltip: {
+			callbacks: {
+				title: () => [],
+				label: function (context: any) {
+					const value = context.raw; // Access the raw value of the data point
+					return value;
+				},
+			},
+			bodyFont: {
+				size: 14,
+			},
+		},
+		datalabels: {
+			formatter: function (value: number) {
+				return (value * 100).toFixed(2) + "%";
+			},
+			font: {
+				size: 14,
+				weight: 500,
+			},
+		},
+	},
+};
 
-			break;
-		case "description":
-			title = "User Description";
-			icon = MonitorIcon;
-			alt = "Monitor Icon";
-			text = props.data.description;
-			bot_probability = props.data.description_probability.bot;
-			human_probability = props.data.description_probability.human;
+export function UsernameCard(props: CardProps) {
+	const data = {
+		labels: [" "],
+		datasets: [
+			{
+				label: "Human/Non-Malicious Bot",
+				data: [props.data.username_probability.human],
+				backgroundColor: ["rgba(99, 255, 132, 0.2)"],
+				borderWidth: 1,
+			},
+			{
+				label: "Malicious Bot",
+				data: [props.data.username_probability.bot],
+				backgroundColor: ["rgba(255, 99, 132, 0.2)"],
+				borderWidth: 1,
+			},
+		],
+	};
 
-			break;
-		case "label":
-			title = "Label";
-			icon = RobotIcon;
-			alt = "Robot Icon";
-			text = props.data.final_prediction;
-			bot_probability = props.data.final_probability.bot;
-			human_probability = props.data.final_probability.human;
-
-			break;
-	}
 	return (
-		<div id={styles.cardDiv}>
-			<div className={styles.front}>
-				<div className={styles.cardPicture}>
-					<Image
-						src={icon}
-						alt={alt}
-						width={0}
-						height={0}
-						style={{ width: "50px" }}
-					/>
+		<div className={styles.cardRow}>
+			<div className={styles.card}>
+				<div className={styles.cardIcon}>
+					<FontAwesomeIcon icon={faUser} />
 				</div>
-				<div className={styles.cardText}>
-					<h1 className={styles.cardTitleFont}>{title}</h1>
-					<p className={styles.cardTextFont}>{text}</p>
+				<div className={styles.cardInfo}>
+					<h3 className="cardTitleFont">Username</h3>
+					<p className="cardTextFont">
+						{props.data.username ?? "N/A"}
+					</p>
 				</div>
 			</div>
-			<div className={styles.back}>
-				<div>
-					<h1 className="sectionSubTitleFont">Bot</h1>
-					<p className="sectionTextFont">
-						{`${(bot_probability * 100).toFixed(2)}%`}
+			<div className={styles.cardChart}>
+				<Bar data={data} options={options}></Bar>
+			</div>
+		</div>
+	);
+}
+export function ScreennameCard(props: CardProps) {
+	const data = {
+		labels: [" "],
+		datasets: [
+			{
+				label: "Human/Non-Malicious Bot",
+				data: [props.data.screenname_probability.human],
+				backgroundColor: ["rgba(99, 255, 132, 0.2)"],
+				borderWidth: 1,
+			},
+			{
+				label: "Malicious Bot",
+				data: [props.data.screenname_probability.bot],
+				backgroundColor: ["rgba(255, 99, 132, 0.2)"],
+				borderWidth: 1,
+			},
+		],
+	};
+
+	return (
+		<div className={styles.cardRow}>
+			<div className={styles.card}>
+				<div className={styles.cardIcon}>
+					<FontAwesomeIcon icon={faSignature} />
+				</div>
+				<div className={styles.cardInfo}>
+					<h3 className="cardTitleFont">Screen Name</h3>
+					<p className="cardTextFont">
+						{props.data.screenname ?? "N/A"}
 					</p>
 				</div>
-				<div>
-					<h1 className="sectionSubTitleFont">Human</h1>
-					<p className="sectionTextFont">
-						{`${(human_probability * 100).toFixed(2)}%`}
-					</p>
-				</div>
+			</div>
+			<div className={styles.cardChart}>
+				<Bar data={data} options={options}></Bar>
 			</div>
 		</div>
 	);
 }
 
-type MetadataCardProps = {
-	data: dataProps;
-};
-
-export function MetadataCard({ data }: MetadataCardProps) {
-	let bot_probability = data.user_metadata_probability.bot;
-	let human_probability = data.user_metadata_probability.human;
+export function DescriptionCard(props: CardProps) {
+	const data = {
+		labels: [" "],
+		datasets: [
+			{
+				label: "Human/Non-Malicious Bot",
+				data: [props.data.description_probability.human],
+				backgroundColor: ["rgba(99, 255, 132, 0.2)"],
+				borderWidth: 1,
+			},
+			{
+				label: "Malicious Bot",
+				data: [props.data.description_probability.bot],
+				backgroundColor: ["rgba(255, 99, 132, 0.2)"],
+				borderWidth: 1,
+			},
+		],
+	};
 
 	return (
-		<div id={styles.cardDiv}>
-			<div className={styles.front}>
-				<div className={styles.cardPicture}>
-					<Image src={InformationIcon} alt="Information Icon" />
+		<div className={styles.cardRow}>
+			<div className={styles.card}>
+				<div className={styles.cardIcon}>
+					<FontAwesomeIcon icon={faFileLines} />
 				</div>
-				<div className={styles.cardText}>
-					<h1 className={styles.cardTitleFont}>Metadata</h1>
-					<p className={styles.cardTextFont}>
-						Following: {data.followings}
-					</p>
-					<p className={styles.cardTextFont}>
-						Followers: {data.followers}
-					</p>
-					<p className={styles.cardTextFont}>
-						Posts: {data.total_posts}
+				<div className={styles.cardInfo}>
+					<h3 className="cardTitleFont">User Description</h3>
+					<p className="cardTextFont">
+						{props.data.description ?? "N/A"}
 					</p>
 				</div>
 			</div>
-			<div className={styles.back}>
-				<div>
-					<h1 className="sectionSubTitleFont">Bot</h1>
-					<p className="sectionTextFont">
-						{`${(bot_probability * 100).toFixed(2)}%`}
-					</p>
+			<div className={styles.cardChart}>
+				<Bar data={data} options={options}></Bar>
+			</div>
+		</div>
+	);
+}
+export function MetadataCard(props: CardProps) {
+	const data = {
+		labels: [" "],
+		datasets: [
+			{
+				label: "Human/Non-Malicious Bot",
+				data: [props.data.user_metadata_probability.human],
+				backgroundColor: ["rgba(99, 255, 132, 0.2)"],
+				borderWidth: 1,
+			},
+			{
+				label: "Malicious Bot",
+				data: [props.data.user_metadata_probability.bot],
+				backgroundColor: ["rgba(255, 99, 132, 0.2)"],
+				borderWidth: 1,
+			},
+		],
+	};
+
+	return (
+		<div className={styles.cardRow}>
+			<div className={styles.card}>
+				<div className={styles.cardIcon}>
+					<FontAwesomeIcon icon={faCircleInfo} />
 				</div>
-				<div>
-					<h1 className="sectionSubTitleFont">Human</h1>
-					<p className="sectionTextFont">
-						{`${(human_probability * 100).toFixed(2)}%`}
-					</p>
+				<div className={styles.cardInfo}>
+					<h3 className="cardTitleFont">Metadata</h3>
+					<div className={styles.metadataCardInfo}>
+						<p className="cardTextFont">
+							Following: {props.data.followings ?? "N/A"}
+						</p>
+						<p className="cardTextFont">
+							Followers: {props.data.followers ?? "N/A"}
+						</p>
+						<p className="cardTextFont">
+							Likes: {props.data.total_likes ?? "N/A"}
+						</p>
+						<p className="cardTextFont">
+							Posts: {props.data.total_posts ?? "N/A"}
+						</p>
+						<p className="cardTextFont">
+							Verified: {String(props.data.verified) ?? "N/A"}
+						</p>
+						<p className="cardTextFont">
+							Protected: {String(props.data.protected) ?? "N/A"}
+						</p>
+					</div>
 				</div>
+			</div>
+			<div className={styles.cardChart}>
+				<Bar data={data} options={options}></Bar>
 			</div>
 		</div>
 	);
 }
 
-type PostDetailsCardProps = {
-	data: dataProps;
-};
-
-export function PostDetailsCard(data: PostDetailsCardProps) {
-	let bot_probability = data.data.post_probability.bot;
-	let human_probability = data.data.post_probability.human;
+export function PostDetailsCard(props: CardProps) {
+	const data = {
+		labels: [" "],
+		datasets: [
+			{
+				label: "Human/Non-Malicious Bot",
+				data: [props.data.post_probability.human],
+				backgroundColor: ["rgba(99, 255, 132, 0.2)"],
+				borderWidth: 1,
+			},
+			{
+				label: "Malicious Bot",
+				data: [props.data.post_probability.bot],
+				backgroundColor: ["rgba(255, 99, 132, 0.2)"],
+				borderWidth: 1,
+			},
+		],
+	};
 
 	return (
-		<div id={styles.cardDiv}>
-			<div className={styles.front}>
-				<div className={styles.cardPicture}>
-					<Image src={MagnifyIcon} alt="Magnify Icon" />
+		<div className={styles.cardRow}>
+			<div className={styles.card}>
+				<div className={styles.cardIcon}>
+					<FontAwesomeIcon icon={faComments} />
 				</div>
-				<div className={styles.cardText}>
-					<h1 className={styles.cardTitleFont}>Post Details</h1>
-					<p className={styles.cardTextFont}>
+				<div className={styles.cardInfo}>
+					<h3 className="cardTitleFont">Post Details</h3>
+					<p className="cardTextFont">
 						Post metadata includes information such as the author,
 						publication date, tags, and categories.
 					</p>
 				</div>
 			</div>
-			<div className={styles.back}>
-				<div>
-					<h1 className="sectionSubTitleFont">Bot</h1>
-					<p className="sectionTextFont">
-						{`${(bot_probability * 100).toFixed(2)}%`}
+			<div className={styles.cardChart}>
+				<Bar data={data} options={options}></Bar>
+			</div>
+		</div>
+	);
+}
+
+export function LabelCard(props: CardProps) {
+	const data = {
+		labels: [" "],
+		datasets: [
+			{
+				label: "Human/Non-Malicious Bot",
+				data: [props.data.final_probability.human],
+				backgroundColor: ["rgba(99, 255, 132, 0.2)"],
+				borderWidth: 1,
+			},
+			{
+				label: "Malicious Bot",
+				data: [props.data.final_probability.bot],
+				backgroundColor: ["rgba(255, 99, 132, 0.2)"],
+				borderWidth: 1,
+			},
+		],
+	};
+
+	return (
+		<div className={styles.cardRow}>
+			<div className={styles.card}>
+				<div className={styles.cardIcon}>
+					{props.data.final_prediction == "Human" ? (
+						<FontAwesomeIcon icon={faUser} />
+					) : (
+						<FontAwesomeIcon icon={faRobot} />
+					)}
+				</div>
+				<div className={styles.cardInfo}>
+					<h3 className="cardTitleFont">Final Label</h3>
+					<p className="cardTextFont">
+						{props.data.final_prediction}
 					</p>
 				</div>
-				<div>
-					<h1 className="sectionSubTitleFont">Human</h1>
-					<p className="sectionTextFont">
-						{`${(human_probability * 100).toFixed(2)}%`}
-					</p>
-				</div>
+			</div>
+			<div className={styles.cardChart}>
+				<Bar data={data} options={options}></Bar>
 			</div>
 		</div>
 	);
