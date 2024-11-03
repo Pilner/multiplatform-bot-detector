@@ -1,47 +1,16 @@
 import styles from "./styles/CardCluster.module.css";
-import Card, { MetadataCard, PostDetailsCard } from "./Card";
-
-type dataProps = {
-	user_id: number;
-	username: string;
-	screenname: string;
-	description: string;
-	followers: number;
-	followings: number;
-	total_likes: number;
-	total_posts: number;
-	verified: boolean;
-	protected: boolean;
-	username_probability: {
-		human: number;
-		bot: number;
-	};
-	screenname_probability: {
-		human: number;
-		bot: number;
-	};
-	description_probability: {
-		human: number;
-		bot: number;
-	};
-	user_metadata_probability: {
-		human: number;
-		bot: number;
-	};
-	post_probability: {
-		human: number;
-		bot: number;
-	};
-	final_probability: {
-		human: number;
-		bot: number;
-	};
-	final_prediction: string;
-	confidence_score: number;
-};
+import { APIDataType } from "@/_types/APIDataType";
+import {
+	UsernameCard,
+	ScreennameCard,
+	DescriptionCard,
+	MetadataCard,
+	PostDetailsCard,
+	LabelCard,
+} from "./Card";
 
 type CardClusterProps = {
-	data?: dataProps;
+	data?: APIDataType;
 };
 
 export default function CardCluster({ data }: CardClusterProps) {
@@ -49,20 +18,35 @@ export default function CardCluster({ data }: CardClusterProps) {
 		return null;
 	}
 
+	const usernameVisibility = Boolean(data.username);
+	const screennameVisiblity = Boolean(data.screenname);
+	const descriptionVisiblity = Boolean(data.description);
+	const metadataVisiblity =
+		Boolean(data.followers) ||
+		Boolean(data.followings) ||
+		Boolean(data.total_likes) ||
+		Boolean(data.total_posts) ||
+		data.verified != undefined ||
+		data.protected != undefined;
+	const postDetailsVisibility = Boolean(data.posts);
+
+	console.log(data);
+	console.log(
+		usernameVisibility,
+		screennameVisiblity,
+		descriptionVisiblity,
+		metadataVisiblity,
+		postDetailsVisibility
+	);
+
 	return (
 		<section id={styles.result}>
-			<div id={styles.firstRow}>
-				<Card type="username" data={data} />
-				<Card type="screenname" data={data} />
-			</div>
-			<div id={styles.secondRow}>
-				<Card type="description" data={data} />
-				<MetadataCard data={data} />
-				<PostDetailsCard data={data} />
-			</div>
-			<div id={styles.thirdRow}>
-				<Card type="label" data={data} />
-			</div>
+			<UsernameCard visible={usernameVisibility} data={data} />
+			<ScreennameCard visible={screennameVisiblity} data={data} />
+			<DescriptionCard visible={descriptionVisiblity} data={data} />
+			<MetadataCard visible={metadataVisiblity} data={data} />
+			<PostDetailsCard visible={postDetailsVisibility} data={data} />
+			<LabelCard data={data} />
 		</section>
 	);
 }

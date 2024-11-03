@@ -10,6 +10,8 @@ dataset_path = "../data/initial_train_data.csv"
 
 train_data_labeled = pd.read_csv(dataset_path)
 
+pipeline_model = "distilbert-base-uncased-finetuned-sst-2-english"
+
 model_path = "../models/Unsupervised_models_10-15.joblib"
 model_tool = joblib.load(model_path)
 
@@ -90,8 +92,29 @@ def aggregate_sentiment_analysis(sentiment_data):
 
 
 def sentiment_analysis(data_posts):
+
+	if not data_posts:
+		return {
+			'post_md_like_mean': np.nan,
+			'post_md_like_std': np.nan,
+			'post_md_retweet_mean': np.nan,
+			'post_md_retweet_std': np.nan,
+			'post_md_reply_mean': np.nan,
+			'post_md_reply_std': np.nan,
+			'post_md_quote_mean': np.nan,
+			'post_md_quote_std': np.nan,
+			'post_text_length_mean': np.nan,
+			'post_text_length_std': np.nan,
+			'post_sentiment_score_mean': np.nan,
+			'post_sentiment_score_std': np.nan,
+			'post_sentiment_numeric_mean': np.nan,
+			'post_sentiment_numeric_std': np.nan,
+			'post_sentiment_numeric_prop_positive': np.nan,
+			'post_sentiment_numeric_prop_negative': np.nan
+		}
+
 	# Load the sentiment-analysis pipeline
-	sentiment_pipeline = pipeline("sentiment-analysis")
+	sentiment_pipeline = pipeline("sentiment-analysis", model=pipeline_model)
 
 	# Analyze sentiment for the posts
 	sentiment_results = sentiment_pipeline(
@@ -126,49 +149,71 @@ def sentiment_analysis(data_posts):
 
 def feature_engineering(input_data):
 	data = {}
-	data["user_id"] = input_data["user_id"]
-	data["username"] = input_data["username"]
-	data["username_uppercase"] = uppercase_count(input_data["username"])
-	data["username_lowercase"] = lowercase_count(input_data["username"])
-	data["username_numeric"] = numeric_count(input_data["username"])
-	data["username_special"] = special_count(input_data["username"])
-	data["username_length"] = len(input_data["username"])
-	data["username_se"] = string_entropy(input_data["username"])
+	data["user_id"] = input_data["user_id"] if "user_id" in input_data else None
 
-	data["screenname"] = input_data["screenname"]
-	data["screenname_uppercase"] = uppercase_count(input_data["screenname"])
-	data["screenname_lowercase"] = lowercase_count(input_data["screenname"])
-	data["screenname_numeric"] = numeric_count(input_data["screenname"])
-	data["screenname_special"] = special_count(input_data["screenname"])
-	data["screenname_length"] = len(input_data["screenname"])
-	data["screenname_se"] = string_entropy(input_data["screenname"])
-	data["screenname_emoji"] = emoji_count(input_data["screenname"])
-	data["screenname_hashtag"] = hashtag_count(input_data["screenname"])
-	data["screenname_word"] = word_count(input_data["screenname"])
+	data["username"] = input_data["username"] if "username" in input_data and input_data["username"] != "" else None
+	data["username_uppercase"] = uppercase_count(
+		input_data["username"]) if "username" in input_data and input_data["username"] != "" else None
+	data["username_lowercase"] = lowercase_count(
+		input_data["username"]) if "username" in input_data and input_data["username"] != "" else None
+	data["username_numeric"] = numeric_count(
+		input_data["username"]) if "username" in input_data and input_data["username"] != "" else None
+	data["username_special"] = special_count(
+		input_data["username"]) if "username" in input_data and input_data["username"] != "" else None
+	data["username_length"] = len(
+		input_data["username"]) if "username" in input_data and input_data["username"] != "" else None
+	data["username_se"] = string_entropy(
+		input_data["username"]) if "username" in input_data and input_data["username"] != "" else None
 
-	data["description"] = input_data["description"]
-	data["description_length"] = len(input_data["description"])
+	data["screenname"] = input_data["screenname"] if "screenname" in input_data and input_data["screenname"] != "" else None
+	data["screenname_uppercase"] = uppercase_count(
+		input_data["screenname"]) if "screenname" in input_data and input_data["screenname"] != "" else None
+	data["screenname_lowercase"] = lowercase_count(
+		input_data["screenname"]) if "screenname" in input_data and input_data["screenname"] != "" else None
+	data["screenname_numeric"] = numeric_count(
+		input_data["screenname"]) if "screenname" in input_data and input_data["screenname"] != "" else None
+	data["screenname_special"] = special_count(
+		input_data["screenname"]) if "screenname" in input_data and input_data["screenname"] != "" else None
+	data["screenname_length"] = len(
+		input_data["screenname"]) if "screenname" in input_data and input_data["screenname"] != "" else None
+	data["screenname_se"] = string_entropy(
+		input_data["screenname"]) if "screenname" in input_data and input_data["screenname"] != "" else None
+	data["screenname_emoji"] = emoji_count(
+		input_data["screenname"]) if "screenname" in input_data and input_data["screenname"] != "" else None
+	data["screenname_hashtag"] = hashtag_count(
+		input_data["screenname"]) if "screenname" in input_data and input_data["screenname"] != "" else None
+	data["screenname_word"] = word_count(
+		input_data["screenname"]) if "screenname" in input_data and input_data["screenname"] != "" else None
 
-	data["user_md_follower"] = input_data["followers"]
-	data["user_md_following"] = input_data["followings"]
+	data["description"] = input_data["description"] if "description" in input_data and input_data["description"] != "" else None
+	data["description_length"] = len(
+		input_data["description"]) if "description" in input_data and input_data["description"] != "" else None
+
+	data["user_md_follower"] = input_data["followers"] if "followers" in input_data else None
+	data["user_md_following"] = input_data["followings"] if "followings" in input_data else None
 	data["user_md_follow_ratio"] = ratio(
-		input_data["followers"], input_data["followings"])
-	data["user_md_total_post"] = input_data["total_posts"]
-	data["user_md_total_like"] = input_data["total_likes"]
-	data["user_md_verified"] = input_data["verified"]
-	data["user_md_protected"] = input_data["protected"]
+		input_data["followers"], input_data["followings"]) if "followers" in input_data and "followings" in input_data else None
+	data["user_md_total_post"] = input_data["total_posts"] if "total_posts" in input_data else None
+	data["user_md_total_like"] = input_data["total_likes"] if "total_likes" in input_data else None
+	data["user_md_verified"] = input_data["verified"] if "verified" in input_data else None
+	data["user_md_protected"] = input_data["protected"] if "protected" in input_data else None
 
 	data_posts = []
-	for post in input_data["posts"]:
-		post_data = {}
-		post_data["post_md_like"] = post["post_like"]
-		post_data["post_md_retweet"] = post["post_retweet"]
-		post_data["post_md_reply"] = post["post_reply"]
-		post_data["post_md_quote"] = post["post_quote"]
-		post_data["post_text"] = post["post_text"]
-		post_data["post_text_length"] = len(post["post_text"])
+	if "posts" in input_data:
 
-		data_posts.append(post_data)
+		for post in input_data["posts"]:
+			post_data = {}
+			post_data["post_md_like"] = post["post_like"] if "post_like" in post else None
+			post_data["post_md_retweet"] = post["post_retweet"] if "post_retweet" in post else None
+			post_data["post_md_reply"] = post["post_reply"] if "post_reply" in post else None
+			post_data["post_md_quote"] = post["post_quote"] if "post_quote" in post else None
+			post_data["post_text"] = post["post_text"] if "post_text" in post and post["post_text"] != "" else None
+			post_data["post_text_length"] = len(
+				post["post_text"]) if "post_text" in post and post["post_text"] != "" else None
+
+			data_posts.append(post_data)
+	else:
+		data_posts = None
 
 	sentiment_results = sentiment_analysis(data_posts)
 	# replace np.float64 with float
@@ -294,7 +339,7 @@ def predict(data):
 	for i in range(len(final_predictions)):
 		print(f"Index: {i + 1}")  # Print the index
 		print(f"Prediction: {
-			  'Human' if final_predictions[i] == False else 'Bot'}")
+			'Human' if final_predictions[i] == False else 'Bot'}")
 		print(f"Probabilities - Human: {final_probabilities[i][0]:.4f}, Bot: {
 			final_probabilities[i][1]:.4f}")
 		print(f"Confidence Score: {confidence_scores[i]:.4f}\n")
@@ -308,9 +353,8 @@ def predict(data):
 			probabilities['description'][i][1]:.4f}")
 		print(f"User Metadata - Human: {probabilities['user_metadata'][i][0]:.4f}, Bot: {
 			probabilities['user_metadata'][i][1]:.4f}")
-		print(f"Post - Human: {probabilities['post'][i][0]
-			  :.4f}, Bot: {probabilities['post'][i][1]:.4f}")
-		
+		print(f"Post - Human: {probabilities['post'][i][0]              :.4f}, Bot: {probabilities['post'][i][1]:.4f}")
+
 	result_data = {
 		"username_probability": {
 			"human": probabilities['username'][0][0],
