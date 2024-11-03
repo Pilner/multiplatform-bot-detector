@@ -26,6 +26,7 @@ import styles from "./styles/Card.module.css";
 
 type CardProps = {
 	data: APIDataType;
+	visible?: boolean;
 };
 
 Chart.register(
@@ -67,7 +68,7 @@ const options = {
 		},
 		datalabels: {
 			formatter: function (value: number) {
-				return (value * 100).toFixed(2) + "%";
+				return value !== 0 ? (value * 100).toFixed(2) + "%" : null;
 			},
 			font: {
 				size: 14,
@@ -75,6 +76,24 @@ const options = {
 			},
 		},
 	},
+};
+
+const emptyGraph = {
+	labels: [" "],
+	datasets: [
+		{
+			label: "Human/Non-Malicious Bot",
+			data: [0],
+			backgroundColor: ["rgba(99, 255, 132, 0.2)"],
+			borderWidth: 1,
+		},
+		{
+			label: "Malicious Bot",
+			data: [0],
+			backgroundColor: ["rgba(255, 99, 132, 0.2)"],
+			borderWidth: 1,
+		},
+	],
 };
 
 export function UsernameCard(props: CardProps) {
@@ -110,7 +129,10 @@ export function UsernameCard(props: CardProps) {
 				</div>
 			</div>
 			<div className={styles.cardChart}>
-				<Bar data={data} options={options}></Bar>
+				<Bar
+					data={props.visible ? data : emptyGraph}
+					options={options}
+				></Bar>
 			</div>
 		</div>
 	);
@@ -148,7 +170,10 @@ export function ScreennameCard(props: CardProps) {
 				</div>
 			</div>
 			<div className={styles.cardChart}>
-				<Bar data={data} options={options}></Bar>
+				<Bar
+					data={props.visible ? data : emptyGraph}
+					options={options}
+				></Bar>
 			</div>
 		</div>
 	);
@@ -187,7 +212,10 @@ export function DescriptionCard(props: CardProps) {
 				</div>
 			</div>
 			<div className={styles.cardChart}>
-				<Bar data={data} options={options}></Bar>
+				<Bar
+					data={props.visible ? data : emptyGraph}
+					options={options}
+				></Bar>
 			</div>
 		</div>
 	);
@@ -233,16 +261,25 @@ export function MetadataCard(props: CardProps) {
 							Posts: {props.data.total_posts ?? "N/A"}
 						</p>
 						<p className="cardTextFont">
-							Verified: {String(props.data.verified) ?? "N/A"}
+							Verified:{" "}
+							{props.data.verified != undefined
+								? String(props.data.verified)
+								: "N/A"}
 						</p>
 						<p className="cardTextFont">
-							Protected: {String(props.data.protected) ?? "N/A"}
+							Protected:{" "}
+							{props.data.protected != undefined
+								? String(props.data.protected)
+								: "N/A"}
 						</p>
 					</div>
 				</div>
 			</div>
 			<div className={styles.cardChart}>
-				<Bar data={data} options={options}></Bar>
+				<Bar
+					data={props.visible ? data : emptyGraph}
+					options={options}
+				></Bar>
 			</div>
 		</div>
 	);
@@ -276,13 +313,17 @@ export function PostDetailsCard(props: CardProps) {
 				<div className={styles.cardInfo}>
 					<h3 className="cardTitleFont">Post Details</h3>
 					<p className="cardTextFont">
-						Post metadata includes information such as the author,
-						publication date, tags, and categories.
+						{props.data.posts
+							? `There are ${props.data.posts.length} post/s.`
+							: "There are no posts given."}
 					</p>
 				</div>
 			</div>
 			<div className={styles.cardChart}>
-				<Bar data={data} options={options}></Bar>
+				<Bar
+					data={props.visible ? data : emptyGraph}
+					options={options}
+				></Bar>
 			</div>
 		</div>
 	);

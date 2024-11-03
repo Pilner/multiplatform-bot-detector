@@ -7,6 +7,8 @@ interface dataProps {
 	value?: string;
 	placeholder?: string;
 	required?: boolean;
+	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+	noSpace?: boolean;
 }
 
 interface InputProps extends dataProps {
@@ -34,6 +36,12 @@ export function Input(props: InputProps) {
 				defaultValue={props.value ?? ""}
 				placeholder={props.placeholder}
 				required={props.required ?? false}
+				onChange={props.onChange}
+				onKeyDown={(event) => {
+					if (props.noSpace && event.key === " ") {
+						event.preventDefault(); // Prevent space character from being entered
+					}
+				}}
 			/>
 		</div>
 	);

@@ -9,6 +9,13 @@ export type APIDataType = {
 	total_posts: number;
 	verified: boolean;
 	protected: boolean;
+	posts: {
+		post_like: number;
+		post_quote: number;
+		post_reply: number;
+		post_retweet: number;
+		post_text: string;
+	}[];
 	username_probability: {
 		human: number;
 		bot: number;

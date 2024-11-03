@@ -40,8 +40,14 @@ export default function InputFormComponent() {
 	const MAX_POSTS = 5;
 
 	const router = useRouter();
+	const [totalPosts, setTotalPosts] = useState(MAX_POSTS);
 	const [posts, setPosts] = useState<{ id: number }[]>([]);
 	const [loading, setLoading] = useState(false);
+
+	if (totalPosts < posts.length) {
+		const newPosts = posts.slice(0, totalPosts); // Keep only the allowed number of posts
+		setPosts(newPosts); // Update the state with the trimmed array
+	}
 
 	const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
 		setLoading(true);
@@ -119,6 +125,13 @@ export default function InputFormComponent() {
 			}
 		}
 
+		if (Object.keys(generalData).length === 0) {
+			alert("Input at least one feature");
+			setLoading(false);
+			document.body.classList.remove(styles.noScroll);
+			return;
+		}
+
 		console.log({ generalData });
 
 		fetch("http://localhost:8000/detection", {
@@ -180,6 +193,7 @@ export default function InputFormComponent() {
 								id="username"
 								label="Username: "
 								placeholder="Enter Username"
+								noSpace={true}
 							/>
 							<Input
 								type="text"
@@ -231,6 +245,11 @@ export default function InputFormComponent() {
 								id="totalPosts"
 								label="Total Post Count: "
 								placeholder="Enter Total Post Count"
+								onChange={(e) =>
+									e.target.value != ""
+										? setTotalPosts(Number(e.target.value))
+										: setTotalPosts(MAX_POSTS)
+								}
 							/>
 						</div>
 						<div>
@@ -314,9 +333,13 @@ export default function InputFormComponent() {
 								</div>
 							</div>
 						))}
-						{posts.length < MAX_POSTS && (
+						{posts.length < Math.min(totalPosts, MAX_POSTS) && (
 							<div id={styles.addPostsDiv}>
-								<button type="button" onClick={addPost}>
+								<button
+									type="button"
+									onClick={addPost}
+									disabled={totalPosts == 0}
+								>
 									<p className="inputLabelFont">
 										{posts.length == 0
 											? "Add posts"

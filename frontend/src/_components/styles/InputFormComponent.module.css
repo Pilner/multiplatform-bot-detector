@@ -94,9 +94,13 @@
 	transition: 200ms;
 }
 
-#addPostsDiv > button:hover {
+#addPostsDiv > button:not([disabled]):hover {
 	background-color: rgb(200, 200, 200);
 	transition: 200ms;
+}
+
+#addPostsDiv > button[disabled] {
+	cursor:initial;
 }
 
 #submitButtonDiv {
