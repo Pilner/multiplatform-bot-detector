@@ -12,7 +12,7 @@ train_data_labeled = pd.read_csv(dataset_path)
 
 pipeline_model = "distilbert-base-uncased-finetuned-sst-2-english"
 
-model_path = "../models/Unsupervised_models_10-26.joblib"
+model_path = "../models/Unsupervised_Models_11_04.joblib"
 model_tool = joblib.load(model_path)
 
 feature_sets = {
@@ -380,7 +380,7 @@ def predict(data):
 			"human": final_probabilities[0][0],
 			"bot": final_probabilities[0][1]
 		},
-		"final_prediction": "Bot" if final_predictions[0] else "Human",
+		"final_prediction": "Malicious Bot" if final_predictions[0] else "Human/Non-Malicious Bot",
 		"confidence_score": confidence_scores[0],
 	}
 
