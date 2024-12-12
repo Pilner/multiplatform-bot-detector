@@ -148,7 +148,7 @@ export default function InputFormComponent() {
 			});
 	};
 
-	const isVerifiedProtectedOptions = [
+	const isVerifiedOptions = [
 		{
 			label: "True",
 			value: "true",
@@ -259,15 +259,7 @@ export default function InputFormComponent() {
 								label="Verified Account: "
 								required={true}
 								value=""
-								options={isVerifiedProtectedOptions}
-							/>
-							<InputSelect
-								name="protected"
-								id="protected"
-								label="Protected Account: "
-								required={true}
-								value=""
-								options={isVerifiedProtectedOptions}
+								options={isVerifiedOptions}
 							/>
 						</div>
 					</div>

@@ -266,12 +266,6 @@ export function MetadataCard(props: CardProps) {
 								? String(props.data.verified)
 								: "N/A"}
 						</p>
-						<p className="cardTextFont">
-							Protected:{" "}
-							{props.data.protected != undefined
-								? String(props.data.protected)
-								: "N/A"}
-						</p>
 					</div>
 				</div>
 			</div>
