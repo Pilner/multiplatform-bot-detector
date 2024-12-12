@@ -5,9 +5,13 @@ export default function Footer() {
 		<footer id={styles.footer}>
 			<div className="container">
 				<div>
-					<p className={styles.footerTextFont}>Copyright © 2024</p>
+					<p className={styles.footerTextFont}>
+						Copyright © 2024
+						<br />
+						Borja-Cerna-Pabroquez-Victuelles
+					</p>
 				</div>
 			</div>
 		</footer>
-	)
+	);
 }
