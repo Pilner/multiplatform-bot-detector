@@ -1,0 +1,15 @@
+.inputDiv {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.inputDiv > label {
+	white-space: nowrap;
+}
+
+.inputDiv > input,
+.inputDiv > textarea,
+.inputDiv > select {
+	width: 100%;
+}

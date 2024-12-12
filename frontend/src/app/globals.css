@@ -124,6 +124,7 @@ select:focus {
 
 textarea {
 	font-family: var(--main-font);
+	resize: none;
 }
 
 input[type="checkbox"] {
@@ -148,6 +149,12 @@ input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 	appearance: none;
 	margin: 0;
+}
+
+button {
+	border: none;
+	text-decoration: none;
+	background-color: inherit;
 }
 
 /* #endregion */
@@ -175,7 +182,7 @@ input::-webkit-inner-spin-button {
 	color: inherit;
 }
 
-.sectionSubTitleFont {
+.sectionSubtitleFont {
 	font-family: var(--main-font);
 	font-weight: 400;
 	font-size: 24px;
@@ -188,6 +195,27 @@ input::-webkit-inner-spin-button {
 	font-weight: 400;
 	font-size: 20px;
 	color: inherit;
+}
+
+.inputLabelFont {
+	font-family: var(--main-font);
+	font-weight: 700;
+	font-size: 20px;
+	color: inherit;
+}
+
+.cardTitleFont {
+	font-family: var(--main-font);
+	font-weight: 700;
+	font-size: 28px;
+	color: inherit
+}
+
+.cardTextFont {
+	font-family: var(--main-font);
+	font-weight: 400;
+	font-size: 24px;
+	color: inherit
 }
 
 /* #endregion */
