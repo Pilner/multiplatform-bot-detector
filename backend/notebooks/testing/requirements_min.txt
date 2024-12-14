@@ -1,0 +1,6 @@
+pandas
+numpy
+emoji
+transformers
+scikit-learn
+ipykernel
