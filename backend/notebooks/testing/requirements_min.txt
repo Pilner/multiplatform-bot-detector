@@ -4,3 +4,7 @@ emoji
 transformers
 scikit-learn
 ipykernel
+fastparquet
+seaborn
+scipy
+pyarrow
