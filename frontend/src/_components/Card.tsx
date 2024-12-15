@@ -102,13 +102,13 @@ export function UsernameCard(props: CardProps) {
 		datasets: [
 			{
 				label: "Human/Non-Malicious Bot",
-				data: [props.data.username_probability.human],
+				data: [props.data.prediction.username_probability.human],
 				backgroundColor: ["rgba(99, 255, 132, 0.2)"],
 				borderWidth: 1,
 			},
 			{
 				label: "Malicious Bot",
-				data: [props.data.username_probability.bot],
+				data: [props.data.prediction.username_probability.bot],
 				backgroundColor: ["rgba(255, 99, 132, 0.2)"],
 				borderWidth: 1,
 			},
@@ -143,13 +143,13 @@ export function ScreennameCard(props: CardProps) {
 		datasets: [
 			{
 				label: "Human/Non-Malicious Bot",
-				data: [props.data.screenname_probability.human],
+				data: [props.data.prediction.screenname_probability.human],
 				backgroundColor: ["rgba(99, 255, 132, 0.2)"],
 				borderWidth: 1,
 			},
 			{
 				label: "Malicious Bot",
-				data: [props.data.screenname_probability.bot],
+				data: [props.data.prediction.screenname_probability.bot],
 				backgroundColor: ["rgba(255, 99, 132, 0.2)"],
 				borderWidth: 1,
 			},
@@ -185,13 +185,13 @@ export function DescriptionCard(props: CardProps) {
 		datasets: [
 			{
 				label: "Human/Non-Malicious Bot",
-				data: [props.data.description_probability.human],
+				data: [props.data.prediction.description_probability.human],
 				backgroundColor: ["rgba(99, 255, 132, 0.2)"],
 				borderWidth: 1,
 			},
 			{
 				label: "Malicious Bot",
-				data: [props.data.description_probability.bot],
+				data: [props.data.prediction.description_probability.bot],
 				backgroundColor: ["rgba(255, 99, 132, 0.2)"],
 				borderWidth: 1,
 			},
@@ -226,13 +226,13 @@ export function MetadataCard(props: CardProps) {
 		datasets: [
 			{
 				label: "Human/Non-Malicious Bot",
-				data: [props.data.user_metadata_probability.human],
+				data: [props.data.prediction.user_metadata_probability.human],
 				backgroundColor: ["rgba(99, 255, 132, 0.2)"],
 				borderWidth: 1,
 			},
 			{
 				label: "Malicious Bot",
-				data: [props.data.user_metadata_probability.bot],
+				data: [props.data.prediction.user_metadata_probability.bot],
 				backgroundColor: ["rgba(255, 99, 132, 0.2)"],
 				borderWidth: 1,
 			},
@@ -285,13 +285,13 @@ export function PostDetailsCard(props: CardProps) {
 		datasets: [
 			{
 				label: "Human/Non-Malicious Bot",
-				data: [props.data.post_probability.human],
+				data: [props.data.prediction.post_probability.human],
 				backgroundColor: ["rgba(99, 255, 132, 0.2)"],
 				borderWidth: 1,
 			},
 			{
 				label: "Malicious Bot",
-				data: [props.data.post_probability.bot],
+				data: [props.data.prediction.post_probability.bot],
 				backgroundColor: ["rgba(255, 99, 132, 0.2)"],
 				borderWidth: 1,
 			},
@@ -329,13 +329,13 @@ export function LabelCard(props: CardProps) {
 		datasets: [
 			{
 				label: "Human/Non-Malicious Bot",
-				data: [props.data.final_probability.human],
+				data: [props.data.prediction.final_probability.human],
 				backgroundColor: ["rgba(99, 255, 132, 0.2)"],
 				borderWidth: 1,
 			},
 			{
 				label: "Malicious Bot",
-				data: [props.data.final_probability.bot],
+				data: [props.data.prediction.final_probability.bot],
 				backgroundColor: ["rgba(255, 99, 132, 0.2)"],
 				borderWidth: 1,
 			},
@@ -346,7 +346,7 @@ export function LabelCard(props: CardProps) {
 		<div className={styles.cardRow}>
 			<div className={styles.card}>
 				<div className={styles.cardIcon}>
-					{props.data.final_prediction == "Human" ? (
+					{props.data.prediction.final_prediction == "Human" ? (
 						<FontAwesomeIcon icon={faUser} />
 					) : (
 						<FontAwesomeIcon icon={faRobot} />
@@ -355,7 +355,7 @@ export function LabelCard(props: CardProps) {
 				<div className={styles.cardInfo}>
 					<h3 className="cardTitleFont">Final Label</h3>
 					<p className="cardTextFont">
-						{props.data.final_prediction}
+						{props.data.prediction.final_prediction}
 					</p>
 				</div>
 			</div>

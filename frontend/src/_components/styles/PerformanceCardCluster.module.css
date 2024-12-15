@@ -1,0 +1,6 @@
+#result {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	margin: 50px 0;
+}

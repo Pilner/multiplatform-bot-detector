@@ -59,3 +59,14 @@
 	border-radius: 16px;
 	padding: 32px;
 }
+
+#performanceMetricsDiv {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+#performanceMetricsDiv > p {
+	margin: auto;
+	text-align: center;
+}
