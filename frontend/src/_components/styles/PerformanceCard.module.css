@@ -32,6 +32,7 @@
 .cardInfo {
 	flex: 5;
 	align-self: center;
+	text-align: left;
 }
 
 .cardChart {

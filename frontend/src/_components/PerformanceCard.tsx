@@ -67,7 +67,7 @@ const options = {
 			},
 			font: {
 				size: 14,
-				weight: 500,
+				weight: 600,
 			},
 		},
 	},
@@ -80,6 +80,20 @@ const divergingBarOptions = {
 			stacked: false, // No stacking for diverging bars
 			min: -1, // Allow negative values
 			max: 1,
+			grid: {
+				drawTicks: true,
+				drawBorder: false,
+				color: (context: any) => {
+					// Highlight the gridline at 0
+					return context.tick.value === 0
+						? "rgba(0, 0, 0, 0.5)"
+						: "rgba(200, 200, 200, 0.5)";
+				},
+				lineWidth: (context: any) => {
+					// Make the midline thicker
+					return context.tick.value === 0 ? 2 : 1;
+				},
+			},
 		},
 		y: {
 			stacked: false, // No stacking
@@ -106,15 +120,14 @@ const divergingBarOptions = {
 			},
 			font: {
 				size: 14,
-				weight: 500,
+				weight: 600,
 			},
 		},
 	},
 };
 
 export function AccuracyCard(props: PerformanceCardProps) {
-	const { accuracy, precision, recall, f1_score, mcc } =
-		props.data.results.overall;
+	const { accuracy } = props.data.results.overall;
 
 	const data = {
 		labels: [""],
@@ -122,8 +135,8 @@ export function AccuracyCard(props: PerformanceCardProps) {
 			{
 				label: "Accuracy",
 				data: [accuracy ?? 0],
-				backgroundColor: ["rgba(99, 255, 132, 0.2)"],
-				borderColor: ["rgba(99, 255, 132, 0.2)"],
+				backgroundColor: ["rgba(99, 255, 132, 0.4)"],
+				borderColor: ["rgba(99, 255, 132, 0.4)"],
 				borderWidth: 1,
 			},
 		],
@@ -150,8 +163,7 @@ export function AccuracyCard(props: PerformanceCardProps) {
 }
 
 export function PrecisionCard(props: PerformanceCardProps) {
-	const { accuracy, precision, recall, f1_score, mcc } =
-		props.data.results.overall;
+	const { precision } = props.data.results.overall;
 
 	const data = {
 		labels: [""],
@@ -159,8 +171,8 @@ export function PrecisionCard(props: PerformanceCardProps) {
 			{
 				label: "Precision",
 				data: [precision ?? 0],
-				backgroundColor: ["rgba(99, 255, 132, 0.2)"],
-				borderColor: ["rgba(99, 255, 132, 0.2)"],
+				backgroundColor: ["rgba(99, 255, 132, 0.4)"],
+				borderColor: ["rgba(99, 255, 132, 0.4)"],
 				borderWidth: 1,
 			},
 		],
@@ -187,8 +199,7 @@ export function PrecisionCard(props: PerformanceCardProps) {
 }
 
 export function RecallCard(props: PerformanceCardProps) {
-	const { accuracy, precision, recall, f1_score, mcc } =
-		props.data.results.overall;
+	const { recall } = props.data.results.overall;
 
 	const data = {
 		labels: [""],
@@ -196,8 +207,8 @@ export function RecallCard(props: PerformanceCardProps) {
 			{
 				label: "Recall",
 				data: [recall ?? 0],
-				backgroundColor: ["rgba(99, 255, 132, 0.2)"],
-				borderColor: ["rgba(99, 255, 132, 0.2)"],
+				backgroundColor: ["rgba(99, 255, 132, 0.4)"],
+				borderColor: ["rgba(99, 255, 132, 0.4)"],
 				borderWidth: 1,
 			},
 		],
@@ -222,8 +233,7 @@ export function RecallCard(props: PerformanceCardProps) {
 }
 
 export function F1ScoreCard(props: PerformanceCardProps) {
-	const { accuracy, precision, recall, f1_score, mcc } =
-		props.data.results.overall;
+	const { f1_score } = props.data.results.overall;
 
 	const data = {
 		labels: [""],
@@ -231,8 +241,8 @@ export function F1ScoreCard(props: PerformanceCardProps) {
 			{
 				label: "F1 Score",
 				data: [f1_score ?? 0],
-				backgroundColor: ["rgba(99, 255, 132, 0.2)"],
-				borderColor: ["rgba(99, 255, 132, 0.2)"],
+				backgroundColor: ["rgba(99, 255, 132, 0.4)"],
+				borderColor: ["rgba(99, 255, 132, 0.4)"],
 				borderWidth: 1,
 			},
 		],
@@ -259,8 +269,7 @@ export function F1ScoreCard(props: PerformanceCardProps) {
 }
 
 export function MCCCard(props: PerformanceCardProps) {
-	const { accuracy, precision, recall, f1_score, mcc } =
-		props.data.results.overall;
+	const { mcc } = props.data.results.overall;
 
 	const data = {
 		labels: [""],
@@ -270,13 +279,13 @@ export function MCCCard(props: PerformanceCardProps) {
 				data: [mcc ?? 0],
 				backgroundColor: [
 					mcc >= 0
-						? "rgba(99, 255, 132, 0.2)"
-						: "rgba(255, 99, 132, 0.2)",
+						? "rgba(99, 255, 132, 0.4)"
+						: "rgba(255, 99, 132, 0.4)",
 				],
 				borderColor: [
 					mcc >= 0
-						? "rgba(99, 255, 132, 0.2)"
-						: "rgba(255, 99, 132, 0.2)",
+						? "rgba(99, 255, 132, 0.4)"
+						: "rgba(255, 99, 132, 0.4)",
 				],
 				borderWidth: 1,
 			},
