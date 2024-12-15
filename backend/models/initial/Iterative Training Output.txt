@@ -1,0 +1,184 @@
+Iteration: 1
+Iteration 1 Evaluation Metrics:
+Accuracy: 0.89
+Precision: 0.85
+Recall: 0.93
+F1 Score: 0.89
+MCC: 0.77
+62
+Iteration: 2
+Iteration 2 Evaluation Metrics:
+Accuracy: 0.89
+Precision: 0.85
+Recall: 0.94
+F1 Score: 0.89
+MCC: 0.78
+178
+Iteration: 3
+Iteration 3 Evaluation Metrics:
+Accuracy: 0.90
+Precision: 0.87
+Recall: 0.93
+F1 Score: 0.90
+MCC: 0.79
+260
+Iteration: 4
+Iteration 4 Evaluation Metrics:
+Accuracy: 0.90
+Precision: 0.89
+Recall: 0.93
+F1 Score: 0.91
+MCC: 0.81
+318
+Iteration: 5
+Iteration 5 Evaluation Metrics:
+Accuracy: 0.90
+Precision: 0.90
+Recall: 0.91
+F1 Score: 0.90
+MCC: 0.80
+383
+Iteration: 6
+Iteration 6 Evaluation Metrics:
+Accuracy: 0.90
+Precision: 0.90
+Recall: 0.90
+F1 Score: 0.90
+MCC: 0.80
+474
+Iteration: 7
+Iteration 7 Evaluation Metrics:
+Accuracy: 0.90
+Precision: 0.91
+Recall: 0.88
+F1 Score: 0.89
+MCC: 0.79
+566
+Iteration: 8
+Iteration 8 Evaluation Metrics:
+Accuracy: 0.90
+Precision: 0.91
+Recall: 0.88
+F1 Score: 0.89
+MCC: 0.79
+680
+Iteration: 9
+Iteration 9 Evaluation Metrics:
+Accuracy: 0.89
+Precision: 0.92
+Recall: 0.86
+F1 Score: 0.89
+MCC: 0.79
+804
+Iteration: 10
+Iteration 10 Evaluation Metrics:
+Accuracy: 0.89
+Precision: 0.92
+Recall: 0.86
+F1 Score: 0.89
+MCC: 0.79
+978
+Iteration: 11
+Iteration 11 Evaluation Metrics:
+Accuracy: 0.90
+Precision: 0.92
+Recall: 0.86
+F1 Score: 0.89
+MCC: 0.79
+1298
+Iteration: 12
+Iteration 12 Evaluation Metrics:
+Accuracy: 0.90
+Precision: 0.93
+Recall: 0.87
+F1 Score: 0.90
+MCC: 0.80
+1651
+Iteration: 13
+Iteration 13 Evaluation Metrics:
+Accuracy: 0.90
+Precision: 0.93
+Recall: 0.86
+F1 Score: 0.89
+MCC: 0.80
+1707
+Iteration: 14
+Iteration 14 Evaluation Metrics:
+Accuracy: 0.90
+Precision: 0.93
+Recall: 0.86
+F1 Score: 0.89
+MCC: 0.80
+1731
+Iteration: 15
+Iteration 15 Evaluation Metrics:
+Accuracy: 0.89
+Precision: 0.92
+Recall: 0.86
+F1 Score: 0.89
+MCC: 0.79
+1738
+Iteration: 16
+Iteration 16 Evaluation Metrics:
+Accuracy: 0.89
+Precision: 0.92
+Recall: 0.86
+F1 Score: 0.89
+MCC: 0.79
+1741
+Iteration: 17
+Iteration 17 Evaluation Metrics:
+Accuracy: 0.89
+Precision: 0.93
+Recall: 0.85
+F1 Score: 0.89
+MCC: 0.79
+1745
+Iteration: 18
+Iteration 18 Evaluation Metrics:
+Accuracy: 0.89
+Precision: 0.92
+Recall: 0.86
+F1 Score: 0.89
+MCC: 0.79
+1750
+Iteration: 19
+Iteration 19 Evaluation Metrics:
+Accuracy: 0.89
+Precision: 0.93
+Recall: 0.85
+F1 Score: 0.89
+MCC: 0.79
+1754
+Iteration: 20
+Iteration 20 Evaluation Metrics:
+Accuracy: 0.90
+Precision: 0.93
+Recall: 0.86
+F1 Score: 0.89
+MCC: 0.79
+1757
+Iteration: 21
+Iteration 21 Evaluation Metrics:
+Accuracy: 0.89
+Precision: 0.92
+Recall: 0.85
+F1 Score: 0.88
+MCC: 0.78
+1758
+Iteration: 22
+Iteration 22 Evaluation Metrics:
+Accuracy: 0.90
+Precision: 0.93
+Recall: 0.86
+F1 Score: 0.89
+MCC: 0.79
+1760
+Iteration: 23
+Iteration 23 Evaluation Metrics:
+Accuracy: 0.90
+Precision: 0.93
+Recall: 0.86
+F1 Score: 0.89
+MCC: 0.79
+1760

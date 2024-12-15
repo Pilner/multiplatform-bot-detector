@@ -16,30 +16,59 @@ export type APIDataType = {
 		post_retweet: number;
 		post_text: string;
 	}[];
-	username_probability: {
-		human: number;
-		bot: number;
+	prediction: {
+		username_probability: {
+			human: number;
+			bot: number;
+		};
+		screenname_probability: {
+			human: number;
+			bot: number;
+		};
+		description_probability: {
+			human: number;
+			bot: number;
+		};
+		user_metadata_probability: {
+			human: number;
+			bot: number;
+		};
+		post_probability: {
+			human: number;
+			bot: number;
+		};
+		final_probability: {
+			human: number;
+			bot: number;
+		};
+		final_prediction: string;
+		confidence_score: number;
 	};
-	screenname_probability: {
-		human: number;
-		bot: number;
+};
+
+export type APIPerformanceDataType = {
+	results: {
+		overall: {
+			accuracy: number;
+			precision: number;
+			recall: number;
+			f1_score: number;
+			mcc: number;
+		};
+		individual: {
+			accuracy: number;
+			precision: number;
+			recall: number;
+			f1_score: number;
+			mcc: number;
+		}[];
 	};
-	description_probability: {
-		human: number;
-		bot: number;
+	mode: "proposed_model" | "baseline_model";
+	confusion_matrix: {
+		TP: number;
+		TN: number;
+		FP: number;
+		FN: number;
 	};
-	user_metadata_probability: {
-		human: number;
-		bot: number;
-	};
-	post_probability: {
-		human: number;
-		bot: number;
-	};
-	final_probability: {
-		human: number;
-		bot: number;
-	};
-	final_prediction: string;
-	confidence_score: number;
+	excel_download: string;
 };

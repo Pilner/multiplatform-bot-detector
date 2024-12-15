@@ -4,17 +4,26 @@ import { useState } from "react";
 
 import styles from "./page.module.css";
 import DragDropComponent from "@/_components/DragDropComponent";
+import InputFormComponent from "@/_components/InputFormComponent";
+import PerformanceDragDropComponent from "@/_components/PerformanceDragDropComponent";
 import Navbar from "@/_components/semantics/Navbar";
 import Footer from "@/_components/semantics/Footer";
-import InputFormComponent from "@/_components/InputFormComponent";
 
 enum InputMode {
 	DragDrop,
 	InputForm,
 }
 
+enum PerformanceMode {
+	Proposed,
+	Baseline,
+}
+
 export default function Home() {
 	const [inputMode, setInputMode] = useState<InputMode>(InputMode.DragDrop);
+	const [performanceMode, setPerformanceMode] = useState<PerformanceMode>(
+		PerformanceMode.Proposed
+	);
 
 	return (
 		<>
@@ -30,32 +39,41 @@ export default function Home() {
 							Self-Training Approach
 						</p>
 					</section>
-					<div id={styles.modeSelector}>
-						<button
-							type="button"
-							onClick={() => setInputMode(InputMode.DragDrop)}
-							className={
-								inputMode == InputMode.DragDrop
-									? styles.activeButton
-									: ""
-							}
-						>
-							Drag & Drop
-						</button>
-						<button
-							type="button"
-							onClick={() => setInputMode(InputMode.InputForm)}
-							className={
-								inputMode == InputMode.InputForm
-									? styles.activeButton
-									: ""
-							}
-						>
-							Input Form
-						</button>
+					<div>
+						<div id={styles.modeSelector}>
+							<button
+								type="button"
+								onClick={() => setInputMode(InputMode.DragDrop)}
+								className={
+									inputMode == InputMode.DragDrop
+										? styles.activeButton
+										: ""
+								}
+							>
+								Drag & Drop
+							</button>
+							<button
+								type="button"
+								onClick={() =>
+									setInputMode(InputMode.InputForm)
+								}
+								className={
+									inputMode == InputMode.InputForm
+										? styles.activeButton
+										: ""
+								}
+							>
+								Input Form
+							</button>
+						</div>
+						{inputMode == InputMode.DragDrop && (
+							<DragDropComponent />
+						)}
+						{inputMode == InputMode.InputForm && (
+							<InputFormComponent />
+						)}
 					</div>
-					{inputMode == InputMode.DragDrop && <DragDropComponent />}
-					{inputMode == InputMode.InputForm && <InputFormComponent />}
+
 					<section id={styles.information}>
 						<div id={styles.aboutDiv}>
 							<h3 className="sectionTitleFont">About</h3>
@@ -121,6 +139,51 @@ export default function Home() {
 								paired t-test, will confirm the significance of
 								the results.
 							</p>
+						</div>
+					</section>
+					<section id={styles.performanceMetricsDiv}>
+						<p className="heroSubTitleFont">Performance Metrics</p>
+						<div>
+							<div id={styles.modeSelector}>
+								<button
+									type="button"
+									onClick={() =>
+										setPerformanceMode(
+											PerformanceMode.Baseline
+										)
+									}
+									className={
+										performanceMode ==
+										PerformanceMode.Baseline
+											? styles.activeButton
+											: ""
+									}
+								>
+									Baseline
+								</button>
+								<button
+									type="button"
+									onClick={() =>
+										setPerformanceMode(
+											PerformanceMode.Proposed
+										)
+									}
+									className={
+										performanceMode ==
+										PerformanceMode.Proposed
+											? styles.activeButton
+											: ""
+									}
+								>
+									Proposed
+								</button>
+							</div>
+							{performanceMode == PerformanceMode.Baseline && (
+								<PerformanceDragDropComponent mode="baseline" />
+							)}
+							{performanceMode == PerformanceMode.Proposed && (
+								<PerformanceDragDropComponent mode="proposed" />
+							)}
 						</div>
 					</section>
 				</div>

@@ -88,10 +88,11 @@ export default function InputFormComponent() {
 			generalData["total_posts"] = Number(formValues.totalPosts);
 		}
 		if (formValues.verified != "none") {
-			generalData["verified"] = Boolean(formValues.verified);
-		}
-		if (formValues.protected != "none") {
-			generalData["protected"] = Boolean(formValues.protected);
+			if (formValues.verified === "true") {
+				generalData["verified"] = true;
+			} else if (formValues.verified === "false") {
+				generalData["verified"] = false;
+			}
 		}
 
 		if (posts.length != 0) {
@@ -110,8 +111,6 @@ export default function InputFormComponent() {
 						);
 					if (formValues[`postReplies${i}`] !== "")
 						post.post_reply = Number(formValues[`postReplies${i}`]);
-					if (formValues[`postQuotes${i}`] !== "")
-						post.post_quote = Number(formValues[`postQuotes${i}`]);
 
 					// Only return post if it has at least one valid property
 					return Object.keys(post).length > 0
@@ -148,7 +147,7 @@ export default function InputFormComponent() {
 			});
 	};
 
-	const isVerifiedProtectedOptions = [
+	const isVerifiedOptions = [
 		{
 			label: "True",
 			value: "true",
@@ -259,15 +258,7 @@ export default function InputFormComponent() {
 								label="Verified Account: "
 								required={true}
 								value=""
-								options={isVerifiedProtectedOptions}
-							/>
-							<InputSelect
-								name="protected"
-								id="protected"
-								label="Protected Account: "
-								required={true}
-								value=""
-								options={isVerifiedProtectedOptions}
+								options={isVerifiedOptions}
 							/>
 						</div>
 					</div>
@@ -319,14 +310,6 @@ export default function InputFormComponent() {
 											name={`postReplies${i}`}
 											id={`postReplies${i}`}
 											label="Replies: "
-											placeholder="0"
-										/>
-										<Input
-											type="number"
-											negative={false}
-											name={`postQuotes${i}`}
-											id={`postQuotes${i}`}
-											label="Quotes: "
 											placeholder="0"
 										/>
 									</div>
