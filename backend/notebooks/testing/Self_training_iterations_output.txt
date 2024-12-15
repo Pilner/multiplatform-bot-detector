@@ -1,0 +1,107 @@
+Iteration: 1
+   iteration  high_conf_count  avg_confidence  bot_ratio  human_ratio  \
+0          1              978        0.775874    0.55726      0.44274   
+
+   consistency_rate  
+0               NaN  
+Iteration 1 Evaluation Metrics:
+Accuracy: 0.61
+Precision: 0.61
+Recall: 0.63
+F1 Score: 0.62
+MCC: 0.23
+
+
+Iteration: 2
+   iteration  high_conf_count  avg_confidence  bot_ratio  human_ratio  \
+0          1              978        0.775874   0.557260     0.442740   
+1          2             1268        0.769916   0.455836     0.544164   
+
+   consistency_rate  
+0               NaN  
+1          0.771293  
+Iteration 2 Evaluation Metrics:
+Accuracy: 0.62
+Precision: 0.63
+Recall: 0.60
+F1 Score: 0.61
+MCC: 0.24
+
+
+Iteration: 3
+   iteration  high_conf_count  avg_confidence  bot_ratio  human_ratio  \
+0          1              978        0.775874   0.557260     0.442740   
+1          2             1268        0.769916   0.455836     0.544164   
+2          3             1843        0.755521   0.625610     0.374390   
+
+   consistency_rate  
+0               NaN  
+1          0.771293  
+2          0.688009  
+Iteration 3 Evaluation Metrics:
+Accuracy: 0.63
+Precision: 0.62
+Recall: 0.72
+F1 Score: 0.66
+MCC: 0.27
+
+
+Iteration: 4
+   iteration  high_conf_count  avg_confidence  bot_ratio  human_ratio  \
+0          1              978        0.775874   0.557260     0.442740   
+1          2             1268        0.769916   0.455836     0.544164   
+2          3             1843        0.755521   0.625610     0.374390   
+3          4             2056        0.750675   0.560798     0.439202   
+
+   consistency_rate  
+0               NaN  
+1          0.771293  
+2          0.688009  
+3          0.896401  
+Iteration 4 Evaluation Metrics:
+Accuracy: 0.65
+Precision: 0.62
+Recall: 0.80
+F1 Score: 0.70
+MCC: 0.31
+
+
+Iteration: 5
+   iteration  high_conf_count  avg_confidence  bot_ratio  human_ratio  \
+0          1              978        0.775874   0.557260     0.442740   
+1          2             1268        0.769916   0.455836     0.544164   
+2          3             1843        0.755521   0.625610     0.374390   
+3          4             2056        0.750675   0.560798     0.439202   
+4          5             4199        0.744364   0.282686     0.717314   
+
+   consistency_rate  
+0               NaN  
+1          0.771293  
+2          0.688009  
+3          0.896401  
+4          0.489640  
+Iteration 5 Evaluation Metrics:
+Accuracy: 0.64
+Precision: 0.61
+Recall: 0.81
+F1 Score: 0.70
+MCC: 0.30
+
+
+Iteration: 6
+   iteration  high_conf_count  avg_confidence  bot_ratio  human_ratio  \
+0          1              978        0.775874   0.557260     0.442740   
+1          2             1268        0.769916   0.455836     0.544164   
+2          3             1843        0.755521   0.625610     0.374390   
+3          4             2056        0.750675   0.560798     0.439202   
+4          5             4199        0.744364   0.282686     0.717314   
+5          6             3625        0.752581   0.315310     0.684690   
+
+   consistency_rate  
+0               NaN  
+1          0.771293  
+2          0.688009  
+3          0.896401  
+4          0.489640  
+5          1.000000  
+High pseudo-label consistency, stopping self-training.
