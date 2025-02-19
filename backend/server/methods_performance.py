@@ -56,7 +56,7 @@ feature_sets_LDA = {
 }
 
 
-def output_to_excel(X_test, y_test, final_predictions):
+def output_to_excel(X_test, y_test, final_predictions, cm):
     # store all to an excel file combining X_test, y_test, final_predictions
     test_df = X_test.copy()
     print(test_df.dtypes)
@@ -102,16 +102,40 @@ def output_to_excel(X_test, y_test, final_predictions):
                     worksheet.write(
                         row, col_num, value_to_write, mismatch_format)
 
-        # count all the correct and incorrect predictions in the last column
+        # True Positive
+        worksheet.write(1, len(test_df.columns) + 1,
+                        "True Positive")
         worksheet.write(1, len(test_df.columns) + 2,
-                        "Correct Predictions", match_format)
-        worksheet.write(1, len(test_df.columns) + 3,
-                        right_count, match_format)
+                        cm[1][1])
+
+        # True Negative
+        worksheet.write(2, len(test_df.columns) + 1,
+                        "True Negative")
         worksheet.write(2, len(test_df.columns) + 2,
+                        cm[0][0])
+
+        # False Positive
+        worksheet.write(3, len(test_df.columns) + 1,
+                        "False Positive")
+        worksheet.write(3, len(test_df.columns) + 2,
+                        cm[0][1])
+
+        # False Negative
+        worksheet.write(4, len(test_df.columns) + 1,
+                        "False Negative")
+        worksheet.write(4, len(test_df.columns) + 2,
+                        cm[1][0])
+
+        # count all the correct and incorrect predictions in the last column
+        worksheet.write(6, len(test_df.columns) + 1,
+                        "Correct Predictions", match_format)
+        worksheet.write(6, len(test_df.columns) + 2,
+                        right_count, match_format)
+        worksheet.write(7, len(test_df.columns) + 1,
                         "Wrong Predictions", mismatch_format)
-        worksheet.write(2, len(test_df.columns) + 3,
+        worksheet.write(7, len(test_df.columns) + 2,
                         wrong_count, mismatch_format)
-        worksheet.write(3, len(test_df.columns) + 3,
+        worksheet.write(8, len(test_df.columns) + 2,
                         wrong_count + right_count)
 
     # Save the workbook to the buffer
@@ -239,7 +263,7 @@ def statistics(X_test, y_test, X_val, y_val, mode):
 
     print(cm)
 
-    excel_file = output_to_excel(X_test, y_test, final_predictions)
+    excel_file = output_to_excel(X_test, y_test, final_predictions, cm)
 
     # Return the results with the mode
     return {

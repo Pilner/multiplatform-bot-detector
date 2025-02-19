@@ -286,6 +286,7 @@ export default function InputFormComponent() {
 										id={`postText${i}`}
 										label="Post Text: "
 										placeholder={`Enter Post Text ${i + 1}`}
+										required={true}
 									/>
 									<div className={styles.postInputCounts}>
 										<Input
@@ -295,6 +296,7 @@ export default function InputFormComponent() {
 											id={`postLikes${i}`}
 											label="Likes: "
 											placeholder="0"
+											required={true}
 										/>
 										<Input
 											type="number"
@@ -303,6 +305,7 @@ export default function InputFormComponent() {
 											id={`postRetweets${i}`}
 											label="Retweets: "
 											placeholder="0"
+											required={true}
 										/>
 										<Input
 											type="number"
@@ -311,6 +314,7 @@ export default function InputFormComponent() {
 											id={`postReplies${i}`}
 											label="Replies: "
 											placeholder="0"
+											required={true}
 										/>
 									</div>
 								</div>
