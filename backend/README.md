@@ -37,7 +37,6 @@ source .venv_server/bin/activate
 4. Install the required packages
 
 ```bash
-# Minified version of the requirements
 pip install -r ./requirements.txt
 ```
 
