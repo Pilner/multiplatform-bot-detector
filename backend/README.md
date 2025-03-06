@@ -29,7 +29,7 @@ python -m venv .venv_server
 source .venv_server/bin/activate
 
 # If on Windows Systems
-source .venv_server/Scripts/activate
+.venv_server/Scripts/activate
 
 # After running the command, you will now see (venv_server) in your terminal
 ```
@@ -37,8 +37,7 @@ source .venv_server/Scripts/activate
 4. Install the required packages
 
 ```bash
-# Minified version of the requirements
-pip install -r ./requirements_min.txt
+pip install -r ./requirements.txt
 ```
 
 5. After installing, start the backend server process. (<kbd>Ctrl</kbd>+<kbd>C</kbd> to exit process)
